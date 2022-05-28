@@ -1,0 +1,288 @@
+{
+  "hard": [
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "L'informaticien néerlandais Mark Overmars est connu pour avoir créé quel moteur de développement de jeux ?",
+      "correct_answer": "Créateur de jeu",
+      "incorrect_answers": ["Stencyl", "Construction", "Couple 2D"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "L'acronyme 'RIP' représente lequel de ces termes ?",
+      "correct_answer": "Protocole d'informations de routage",
+      "incorrect_answers": [
+        "Processus d'instance d'exécution",
+        "Processus à intervalles réguliers",
+        "Protocole d'inspection de routine"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "Quel type de puce audio possède la Super Nintendo Entertainment System (SNES) ?",
+      "correct_answer": "Échantillonneur ADPCM",
+      "incorrect_answers": [
+        "Synthétiseur FM",
+        "Générateur de sons programmable (PSG)",
+        "Échantillonneur PCM"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "Quel est le nom de code de la micro-architecture Intel Core de huitième génération lancée en octobre 2017 ?",
+      "correct_answer": "Lac au café",
+      "incorrect_answers": ["Pont de sable", "Skylake", "Broadwell"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulte": "difficile",
+      "question": "Le smartphone T-Mobile Sidekick est une version renommée du Danger Hiptop.",
+      "correct_answer": "Vrai",
+      "incorrect_answers": ["Faux"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "Sur quel port HTTP s'exécute-t-il ?",
+      "correct_answer": "80",
+      "incorrect_answers": ["53", "443", "23"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulte": "difficile",
+      "question": "L'IBM PC utilisait un microprocesseur Intel 8008 cadencé à 4,77 MHz et 8 Ko de mémoire.",
+      "correct_answer": "Faux",
+      "incorrect_answers": ["Vrai"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "Lequel des ordinateurs suivants est le plus ancien de ces ordinateurs par date de sortie ?",
+      "correct_answer": "TRS-80",
+      "incorrect_answers": ["Commodore 64", "Spectre ZX", "Pomme 3"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "Laquelle de ces valeurs n'est pas une valeur clé du développement logiciel Agile ?",
+      "correct_answer": "Documentation complète",
+      "incorrect_answers": [
+        "Individus et interactions",
+        "Collaboration client",
+        "Répondre au changement"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "difficile",
+      "question": "Sortie en 2001, la première édition du système d'exploitation Mac OS X d'Apple (version 10.0) a reçu quel nom de code animal ?",
+      "correct_answer": "Guépard",
+      "incorrect_answers": ["Puma", "Tigre", "Léopard"]
+    }
+  ],
+  "easy": [
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "facile",
+      "question": "Dans n'importe quel langage de programmation, quelle est la manière la plus courante d'itérer dans un tableau ?",
+      "correct_answer": "Boucles 'For'",
+      "incorrect_answers": [
+        "Instructions 'Si'",
+        "Boucles 'Do-while'",
+        "boucles 'While'"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "facile",
+      "question": "Qu'est-ce que CPU signifie ?",
+      "correct_answer": "Unité centrale de traitement",
+      "incorrect_answers": [
+        "Unité centrale de process",
+        "Unité Personnelle Informatique",
+        "Unité centrale de Processeur"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "facile",
+      "question": "Dans le langage de programmation Java, lequel de ces mots-clés mettriez-vous sur une variable pour vous assurer qu'elle ne soit pas modifiée ?",
+      "correct_answer": "Finale",
+      "incorrect_answers": ["Statique", "Privé", "Public"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "facile",
+      "question": "A quoi sert le bouton Prt Sc ?",
+      "correct_answer": "Capture ce qui est à l'écran et le copie dans votre presse-papiers",
+      "incorrect_answers": [
+        "Rien",
+        "Enregistre un fichier .png de ce qui est à l'écran dans votre dossier de captures d'écran dans les photos",
+        "Ferme toutes les fenêtres"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulte": "facile",
+      "question": "Les pointeurs n'étaient pas utilisés dans le langage de programmation C d'origine ; ils ont été ajoutés plus tard en C++.",
+      "correct_answer": "Faux",
+      "incorrect_answers": ["Vrai"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "facile",
+      "question": "Sur Twitter, quelle était la limite de caractères d'origine pour un Tweet ?",
+      "correct_answer": "140",
+      "incorrect_answers": ["120", "160", "100"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulte": "facile",
+      "question": "'HTML' signifie Hypertext Markup Language.",
+      "correct_answer": "Vrai",
+      "incorrect_answers": ["Faux"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulte": "facile",
+      "question": "Le temps sur les ordinateurs est mesuré via le système EPOX.",
+      "correct_answer": "Faux",
+      "incorrect_answers": ["Vrai"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulte": "facile",
+      "question": "Linux a d'abord été créé comme une alternative à Windows XP.",
+      "correct_answer": "Faux",
+      "incorrect_answers": ["Vrai"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "facile",
+      "question": "Ce système d'exploitation mobile détenait la plus grande part de marché en 2012.",
+      "correct_answer": "iOS",
+      "incorrect_answers": ["Android", "La mûre", "Symbien"]
+    }
+  ],
+  "medium": [
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Le siège social de Nvidia est basé dans quelle ville de la Silicon Valley ?",
+      "correct_answer": "Santa Clara",
+      "incorrect_answers": ["Palo Alto", "Cupertino", "Vue sur la montagne"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Lequel de ces noms est le nom du dispositif de dépôt de clé défectueux introduit par la National Security Agency en 1993 ?",
+      "correct_answer": "Puce Clipper",
+      "incorrect_answers": ["Machine à énigmes", "« Bonite »", "Nautile"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Que signifie l'acronyme CDN en termes de mise en réseau ?",
+      "correct_answer": "Réseau de diffusion de contenu",
+      "incorrect_answers": [
+        "Réseau de distribution de contenu",
+        "Réseau de données computationnelles",
+        "Réseau de données compressées"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Lequel d'entre eux n'est pas un nom de développement officiel pour une version d'Ubuntu ?",
+      "correct_answer": "Manoir Mystique",
+      "incorrect_answers": [
+        "« Tahr de confiance »",
+        "Licorne Utopique",
+        "Loup-garou astucieux"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Lequel de ces langages de programmation est un langage de bas niveau ?",
+      "correct_answer": "Assemblage",
+      "incorrect_answers": ["Python", "C#", "Pascal"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": ".rs est le domaine de premier niveau pour quel pays ?",
+      "correct_answer": "Serbie",
+      "incorrect_answers": ["Roumanie", "Russie", "Rwanda"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Quelle a été la première version d'Android spécifiquement optimisée pour les tablettes ?",
+      "correct_answer": "Nid d'abeille",
+      "incorrect_answers": ["Éclair", "Froyo", " « Guimauve »"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Les imprimantes laser et à jet d'encre sont des exemples de quel type d'imprimante ?",
+      "correct_answer": "Imprimante sans impact",
+      "incorrect_answers": [
+        "Imprimante à impact",
+        "Imprimante à marguerite",
+        "Imprimante matricielle"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Le nom de l'entreprise technologique HP signifie quoi ?",
+      "correct_answer": "Hewlett-Packard",
+      "incorrect_answers": ["Howard Packman", "Husker-Pollosk", "Hellman-Pohl"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Que signifie RAID ?",
+      "correct_answer": "Matrice redondante de disques indépendants",
+      "incorrect_answers": [
+        "Accès rapide pour les appareils indexés",
+        "Plage d'applications avec des conceptions identiques",
+        "Description d'identification abstraite aléatoire"
+      ]
+    }
+  ]
+}
