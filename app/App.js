@@ -9,34 +9,39 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Home from './screens/Home';
+import Notification from './screens/Notification';
+import Test from './screens/Test';
 import Result from './screens/Result';
-import { Quiz } from './screens';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import Splash from './screens/Splash';
+import {Quiz} from './screens';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-const Stack = createStackNavigator()
+// import Test from './screens/Test';
+
+const Stack = createNativeStackNavigator();
 const App = () => {
-
   return (
+    // <Test />
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false
-        }}
-      >
-        <Stack.Screen name='Home' component={Home} />
+          headerShown: false,
+        }}>
+        <Stack.Screen
+          name="Splash"
+          component={Splash}
+          options={{animationEnabled: false, header: () => null}}
+        />
+        {/* <Stack.Screen name='Test' component={Test} /> */}
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Quiz" component={Quiz} />
-        <Stack.Screen name='Result' component={Result} />
+        <Stack.Screen name="Result" component={Result} />
+        <Stack.Screen name="notification" component={Notification} />
       </Stack.Navigator>
     </NavigationContainer>
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-    // <Home name={name} setName={setName} fetchQuestions={fetchQuestions} />
-    // <Quiz />
   );
 };
 

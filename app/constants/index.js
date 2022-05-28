@@ -1,6 +1,9 @@
-import { COLORS, SIZES } from './theme';
+/* eslint-disable prettier/prettier */
+import { COLORS, SIZES, SHADOW, FONTS } from './theme';
 
 export {
     COLORS,
-    SIZES
+    SIZES,
+    SHADOW,
+    FONTS,
 }
