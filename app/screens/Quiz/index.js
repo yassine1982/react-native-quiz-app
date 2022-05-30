@@ -10,16 +10,18 @@ import {
   Animated,
   StyleSheet,
 } from 'react-native';
-import {COLORS} from '../constants';
-// import data from '../data/QuizData';
-import RenderQuestion from '../components/RenderQuestion';
-import RenderOptions from '../components/RenderOptions';
-import RenderNextButton from '../components/RenderNextButton';
-import QuizBackgroundImage from '../components/QuizBackgroundImage';
-import Hello from '../components/Hello';
+import LinearGradient from 'react-native-linear-gradient';
+
+import {COLORS} from '../../constants';
+import RenderQuestion from '../../components/RenderQuestion';
+import RenderOptions from '../../components/RenderOptions';
+import RenderNextButton from '../../components/RenderNextButton';
+import QuizBackgroundImage from '../../components/QuizBackgroundImage';
+import Hello from '../../components/Hello';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import Sound from 'react-native-sound';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {styles} from './style';
 // shuffel results array
 
 const Quiz = ({route, navigation}) => {
@@ -27,14 +29,9 @@ const Quiz = ({route, navigation}) => {
   const [currQues, setCurrQues] = useState(0);
 
   const {questions, name, difficulty, _levelstart, switchvolume} = route.params;
-  // console.log(options)
-
-  const initialValue = 120;
-  const [initialvalue, setInitialvalue] = useState(0);
-
+  const progressValue = ((currQues + 1) * 100) / questions.length;
+  console.log(progressValue);
   useEffect(() => {
-    setInitialvalue(120);
-    // console.log(questions)
     setOptions(
       questions &&
         handleShuffle([
@@ -44,7 +41,7 @@ const Quiz = ({route, navigation}) => {
     );
   }, [route.params, currQues, questions]);
 
-  const [val, setVal] = useState(0);
+  // const [val, setVal] = useState(0);
 
   const handleShuffle = _options => {
     return _options.sort(() => Math.random() - 0.5);
@@ -69,7 +66,7 @@ const Quiz = ({route, navigation}) => {
     }
 
     //Increment Progress Value by 10
-    setVal(val + 10);
+    // setVal(val + 10);
     // Show Next Button
     setShowNextButton(true);
   };
@@ -130,34 +127,7 @@ const Quiz = ({route, navigation}) => {
       setIsOptionsDisabled(false);
       setShowNextButton(false);
     }
-    Animated.timing(progress, {
-      toValue: currQues + 1,
-      duration: 600,
-      useNativeDriver: false,
-    }).start();
   };
-  const restartQuiz = () => {
-    // setShowScoreModal(false);
-
-    setCurrQues(0);
-    setScore(0);
-    setCurrentOptionSelected(null);
-    setCorrectOption(null);
-    setIsOptionsDisabled(false);
-    setShowNextButton(false);
-    Animated.timing(progress, {
-      toValue: 0,
-      duration: 50,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const [progress] = useState(new Animated.Value(0));
-
-  const progressAnim = progress.interpolate({
-    inputRange: [0, questions.length],
-    outputRange: ['0%', '100%'],
-  });
 
   //Play sound for correct and wrong answers
   const playCorrect = () => {
@@ -195,94 +165,56 @@ const Quiz = ({route, navigation}) => {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-      }}>
-      <StatusBar barStyle="light-content" backgroundColor={COLORS.background} />
-      <View style={styles.container}>
-        {/* Hello World */}
-        <Hello
-          name={name}
-          difficulty={difficulty}
-          score={score}
-          _levelstart={_levelstart}
-        />
+    <LinearGradient
+      colors={['#3b5998', COLORS.background, COLORS.primary]}
+      style={styles.container}>
+      <StatusBar backgroundColor={'#3b5998'} animated={false} />
+      {/* Hello World */}
+      <Hello
+        name={name}
+        difficulty={difficulty}
+        score={score}
+        _levelstart={_levelstart}
+      />
 
-        {/* Question */}
-        <RenderQuestion currQues={currQues} questions={questions} />
+      {/* Question */}
+      <RenderQuestion currQues={currQues} questions={questions} />
 
-        {/* Options */}
-        <RenderOptions
-          options={options}
-          isOptionsDisabled={isOptionsDisabled}
-          validateAnswer={validateAnswer}
-          currentOptionSelected={currentOptionSelected}
-          correctOption={correctOption}
+      {/* Options */}
+      <RenderOptions
+        options={options}
+        isOptionsDisabled={isOptionsDisabled}
+        validateAnswer={validateAnswer}
+        currentOptionSelected={currentOptionSelected}
+        correctOption={correctOption}
+      />
+      {/* ProgressBar */}
+      <View style={styles.ProgressContainer}>
+        <CircularProgress
+          value={progressValue}
+          radius={50}
+          duration={200}
+          progressValueColor={'#ecf0f1'}
+          maxValue={100}
+          valueSuffix={' %'}
+          inActiveStrokeWidth={9}
+          inActiveStrokeColor="#2ecc71"
+          inActiveStrokeOpacity={0.2}
+          titleColor={'white'}
+          titleStyle={{fontWeight: 'bold', fontSize: 17, padding: 2}}
+          // onAnimationComplete={() => console.log('')}
         />
-        {/* ProgressBar */}
-        {/* <RenderProgressBar
-          progressAnim={progressAnim}
-        /> */}
-        <View style={styles.ProgressContainer}>
-          <CircularProgress
-            value={val}
-            radius={40}
-            duration={200}
-            progressValueColor={'#ecf0f1'}
-            maxValue={100}
-            valueSuffix={'%'}
-            inActiveStrokeWidth={9}
-            inActiveStrokeColor="#2ecc71"
-            inActiveStrokeOpacity={0.2}
-            titleColor={'white'}
-            titleStyle={{fontWeight: 'bold', fontSize: 17, padding: 2}}
-            // onAnimationComplete={() => console.log('')}
-          />
-
-          {/* <CircularProgress
-            value={0}
-            radius={40}
-            maxValue={10}
-            initialValue={initialValue}
-            progressValueColor={'#fff'}
-            // activeStrokeColor={'#2ecc71'}
-            // activeStrokeSecondaryColor={'#B20600'}
-            activeStrokeWidth={15}
-            inActiveStrokeWidth={15}
-            duration={10000}
-            onAnimationComplete={() => {
-              // setInitialValue(120)
-            }}
-          /> */}
-          {/* code wifi ocp omnisport24586eee */}
-        </View>
-        {/* Next Button */}
-        <RenderNextButton
-          showNextButton={showNextButton}
-          handleNext={handleNext}
-        />
-        {/* Background Image */}
-        <QuizBackgroundImage />
+        {/* code wifi ocp omnisport24586eee */}
       </View>
-    </SafeAreaView>
+      {/* Next Button */}
+      <RenderNextButton
+        showNextButton={showNextButton}
+        handleNext={handleNext}
+      />
+      {/* Background Image if zIndex = -XXX => no image will be displayed */}
+      <QuizBackgroundImage />
+    </LinearGradient>
   );
 };
 
 export default Quiz;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 16,
-    backgroundColor: COLORS.background,
-    position: 'relative',
-  },
-  ProgressContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 4,
-  },
-});

@@ -21,16 +21,19 @@ import {
   TextInput,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import {COLORS, SIZES, SHADOW, FONTS} from '../constants/theme';
-import Loader from '../components/Loader';
-import Modal from '../components/Modal';
+import {COLORS, SIZES, SHADOW, FONTS} from '../../constants/theme';
+import Loader from '../../components/Loader';
+import Modal from '../../components/Modal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import NetInfo from '@react-native-community/netinfo';
 import LinearGradient from 'react-native-linear-gradient';
-import EN from '../data/EN.json';
-import FR from '../data/FR.json';
+import img1 from '../../assets/images/img1.png';
+import computer from '../../assets/images/computer.png';
+import EN from '../../data/EN.json';
+import FR from '../../data/FR.json';
+import NAT from '../../data/NAT.json';
 
 const Home = ({navigation}) => {
   const [difficulty, setDifficulty] = useState();
@@ -52,6 +55,7 @@ const Home = ({navigation}) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      //go To Quiz Screen with props
       navigation.navigate('Quiz', {
         questions: questions,
         name: validName,
@@ -98,7 +102,8 @@ const Home = ({navigation}) => {
     }
     // console.log(FR[difficulty][0].difficulty);
     switchLanguage
-      ? fetchQuestions(EN[difficulty])
+      ? // ? fetchQuestions(EN[difficulty])
+        fetchQuestions(NAT[difficulty])
       : fetchQuestions(FR[difficulty]);
   };
 
@@ -165,19 +170,6 @@ const Home = ({navigation}) => {
     }
   };
 
-  // useEffect(() => {
-  //   const _addListner = navigation.addListener('didFocus', () => {
-  //     // update based on your requirements
-  //     console.log('reload Home ');
-  //   });
-  //   setTimeout(async () => {
-  //     // _getLevelStart();
-  //   }, 50);
-  //   return () => {
-  //     console.log('return ...');
-  //     navigation.removeListener(_addListner);
-  //   };
-  // }, [navigation]);
   // check connction and
   const _checkConnection = () => {
     // setLoading(true);
@@ -237,7 +229,7 @@ const Home = ({navigation}) => {
     <LinearGradient
       colors={['#3b5998', COLORS.background, COLORS.primary]}
       style={styles.container}>
-      <StatusBar backgroundColor={'#3b5998'} animated={false} />
+      <StatusBar backgroundColor={'#3b5998'} animated={true} />
       {error && <Text>{error}</Text>}
 
       {loading && <Loader />}
@@ -246,13 +238,9 @@ const Home = ({navigation}) => {
           <Text style={styles.title}>Computer</Text>
           <Text style={styles.title}>Quiz</Text>
         </View>
+        <Image source={img1} style={styles.imageTop} resizeMode="contain" />
         <Image
-          source={require('../assets/images/img1.png')}
-          style={styles.imageTop}
-          resizeMode="contain"
-        />
-        <Image
-          source={require('../assets/images/computer.png')}
+          source={computer}
           style={styles.imageComputer}
           resizeMode="contain"
         />
@@ -327,7 +315,7 @@ const Home = ({navigation}) => {
               alignItems: 'center',
               width: '90%',
               alignSelf: 'center',
-              marginTop: 5,
+              marginTop: 40,
             }}>
             <TouchableOpacity
               style={[
@@ -476,7 +464,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     backgroundColor: COLORS.background,
   },
   PickerContainer: {
@@ -531,6 +519,7 @@ const styles = StyleSheet.create({
     width: '90%',
     // backgroundColor: COLORS.accent,
     zIndex: 100,
+    marginTop: 30,
   },
   inputContainer: {
     // height: '20%',

@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
+
 import {
-  StyleSheet,
   Text,
   View,
   Image,
@@ -11,23 +11,32 @@ import {
   Alert,
   BackHandler,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import React, {useEffect} from 'react';
-import {COLORS, SHADOW} from '../constants/theme';
-import success from '../assets/lottie/success.json';
-import warning2 from '../assets/lottie/warning2.json';
-import MessageResult from '../components/MessageResult';
+import {COLORS, SHADOW} from '../../constants/theme';
+import success from '../../assets/lottie/success.json';
+import warning2 from '../../assets/lottie/warning2.json';
+import resultImage from '../../assets/images/result.png';
+import MessageResult from '../../components/MessageResult';
 import {CircularProgressBase} from 'react-native-circular-progress-indicator';
 import Sound from 'react-native-sound';
+import {styles} from './style';
 
 const Result = ({route, navigation}) => {
   const props = {
-    activeStrokeWidth: 12,
+    activeStrokeWidth: 10,
     inActiveStrokeWidth: 10,
     inActiveStrokeOpacity: 0.2,
   };
   const {score, currQues, switchvolume} = route.params;
-  // const score = 10;
-  // const currQues = 10;
+  const numQuestions = currQues + 1; // Total number of questions
+  const minScore = numQuestions / 2 - 1; // Minimum score to get next Level
+  const sccessProgress = (score * 100) / numQuestions;
+  const errorProgress = ((numQuestions - score) * 100) / numQuestions;
+  const correctAnswer = score;
+  const incorectAnswers = numQuestions - score;
+
   useEffect(() => {
     // playOops();
     BackHandler.addEventListener('hardwareBackPress', backPressed);
@@ -38,7 +47,7 @@ const Result = ({route, navigation}) => {
   }, []);
 
   useEffect(() => {
-    if (score > 4) {
+    if (score > minScore) {
       playCongrat();
     } else {
       playOops();
@@ -74,8 +83,8 @@ const Result = ({route, navigation}) => {
         }
 
         if (switchvolume) {
-          correct.play(success => {
-            if (success) {
+          correct.play(succes => {
+            if (succes) {
               // console.log('successfully finished playing');
             }
           });
@@ -92,29 +101,23 @@ const Result = ({route, navigation}) => {
       }
 
       if (switchvolume) {
-        wrong.play(success => {
-          if (success) {
+        wrong.play(sucess => {
+          if (sucess) {
             // console.log('successfully finished playing');
           }
         });
       }
     });
-    // console.log('wrong ', wrong);
-    // setMusic(wrong);
   };
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor={COLORS.background} />
-      <Image
-        source={require('../assets/images/result.png')}
-        style={styles.imageTop}
-        resizeMode="contain"
-      />
+    <LinearGradient
+      colors={['#3b5998', COLORS.background, COLORS.primary]}
+      style={styles.container}>
+      <StatusBar backgroundColor={'#3b5998'} animated={false} />
 
-      {/* <Text style={styles.titlecongrate}>Hard Luck !</Text> */}
-
+      <Image source={resultImage} style={styles.imageTop} resizeMode="center" />
       <View style={[styles.inputContainer, SHADOW]}>
-        {score > 4 ? (
+        {score > minScore ? (
           <MessageResult
             image={success}
             lottieStyle={styles.imageResult}
@@ -130,7 +133,7 @@ const Result = ({route, navigation}) => {
           />
         )}
         <Text style={styles.titlecongrate}>
-          Score : {score} / {currQues + 1}
+          Score : {score} / {numQuestions}
         </Text>
         <View
           style={{
@@ -142,13 +145,13 @@ const Result = ({route, navigation}) => {
           <View style={{padding: 5}}>
             <CircularProgressBase
               {...props}
-              value={score * 10}
+              value={sccessProgress}
               radius={40}
               activeStrokeColor={COLORS.success}
               inActiveStrokeColor={COLORS.success}>
               <CircularProgressBase
                 {...props}
-                value={(currQues + 1 - score) * 10}
+                value={errorProgress}
                 radius={30}
                 activeStrokeColor={COLORS.error}
                 inActiveStrokeColor={COLORS.error}
@@ -156,9 +159,11 @@ const Result = ({route, navigation}) => {
             </CircularProgressBase>
           </View>
           <View style={{padding: 5}}>
-            <Text style={styles.correctanswer}>Correct answers : {score}</Text>
+            <Text style={styles.correctanswer}>
+              Correct answers : {correctAnswer}
+            </Text>
             <Text style={styles.incorrectanswer}>
-              Incorrect answers : {currQues + 1 - score}
+              Incorrect answers : {incorectAnswers}
             </Text>
           </View>
         </View>
@@ -168,7 +173,9 @@ const Result = ({route, navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Home')}
           style={[styles.Start, SHADOW]}>
-          <Text style={styles.titleStart}>Try Next Level</Text>
+          <Text style={styles.titleStart}>
+            {score > minScore ? 'Try Next Level' : 'Retry Quiz'}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={backPressed}
@@ -180,97 +187,8 @@ const Result = ({route, navigation}) => {
           <Text style={styles.titleExit}>Exit</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
 export default Result;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-  },
-  titleContainer: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    borderRadius: 20,
-    width: '90%',
-    backgroundColor: COLORS.accent,
-  },
-  inputContainer: {
-    height: '50%',
-    alignItems: 'center',
-    marginHorizontal: 15,
-    justifyContent: 'space-between',
-    backgroundColor: COLORS.primary,
-    paddingVertical: 20,
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: COLORS.accent,
-  },
-  Start: {
-    height: 42,
-    width: '70%',
-    borderRadius: 50,
-    alignSelf: 'center',
-    alignItems: 'center',
-    // marginTop: SIZES.height / 16,
-    justifyContent: 'center',
-    backgroundColor: COLORS.playagain,
-  },
-  titleStart: {
-    color: COLORS.white,
-    fontSize: 22,
-    fontFamily: 'ComicNeue-BoldItalic',
-  },
-  titleExit: {
-    color: COLORS.white,
-    fontSize: 22,
-    fontFamily: 'ComicNeue-BoldItalic',
-  },
-  titlecongrate: {
-    color: COLORS.white,
-    fontSize: 22,
-    fontWeight: '700',
-    alignSelf: 'center',
-  },
-
-  imageTop: {
-    alignSelf: 'center',
-    height: 200,
-    width: 200,
-    borderRadius: 100,
-    // backgroundColor: COLORS.primary,
-    padding: 0,
-    // margin: 10,
-  },
-  imageWarning: {
-    alignSelf: 'center',
-    height: 120,
-    width: 120,
-    // backgroundColor: COLORS.playagain,
-    // marginTop: -10,
-    padding: 0,
-  },
-  imageResult: {
-    // backgroundColor: COLORS.playagain,
-    alignSelf: 'center',
-    height: 120,
-    width: 120,
-    padding: 0,
-    // marginTop: -10,
-  },
-  correctanswer: {
-    color: COLORS.success,
-    fontSize: 20,
-    fontWeight: '500',
-    alignSelf: 'center',
-  },
-  incorrectanswer: {
-    color: COLORS.error,
-    fontSize: 20,
-    fontWeight: '500',
-    alignSelf: 'center',
-  },
-});

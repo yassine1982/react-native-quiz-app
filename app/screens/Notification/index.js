@@ -2,9 +2,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {COLORS, FONTS, SHADOW, SIZES} from '../constants';
+import {COLORS, FONTS, SHADOW, SIZES} from '../../constants';
 import LottieView from 'lottie-react-native';
-import like from '../assets/lottie/like.json';
+import like from '../../assets/lottie/like.json';
 import Feather from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
 
