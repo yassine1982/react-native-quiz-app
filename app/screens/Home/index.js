@@ -229,7 +229,7 @@ const Home = ({navigation}) => {
     <LinearGradient
       colors={['#3b5998', COLORS.background, COLORS.primary]}
       style={styles.container}>
-      <StatusBar backgroundColor={'#3b5998'} animated={true} />
+      <StatusBar backgroundColor={'#3b5998'} animated={false} />
       {error && <Text>{error}</Text>}
 
       {loading && <Loader />}
@@ -315,7 +315,7 @@ const Home = ({navigation}) => {
               alignItems: 'center',
               width: '90%',
               alignSelf: 'center',
-              marginTop: 40,
+              marginTop: 5,
             }}>
             <TouchableOpacity
               style={[
@@ -464,7 +464,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
+    justifyContent: 'center',
     backgroundColor: COLORS.background,
   },
   PickerContainer: {
@@ -519,7 +519,6 @@ const styles = StyleSheet.create({
     width: '90%',
     // backgroundColor: COLORS.accent,
     zIndex: 100,
-    marginTop: 30,
   },
   inputContainer: {
     // height: '20%',

@@ -53,9 +53,11 @@ const Notification = ({navigation}) => {
 
       <View style={[styles.CardContainer, SHADOW]}>
         <Text style={{fontSize: 18, color: 'white'}}>
-          lorem ipsum dolor sit amet, consectetur adip lorem ipsum dolor sit
-          amet, consectetur adip lorem ipsum dolor sit amet, consectetur adip
-          lorem ipsum dolor sit amet, consectetur adip
+          si vous avez apprécié notre application, veuillez aimer et partager
+          avec vos amis
+          {'\n'}
+          {'\n'}
+          if you have enjoyed our App Please Like And Share With Your Friends
         </Text>
         <View
           style={{
