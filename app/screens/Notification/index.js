@@ -1,6 +1,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
 import React from 'react';
 import {COLORS, FONTS, SHADOW, SIZES} from '../../constants';
 import LottieView from 'lottie-react-native';
@@ -15,6 +21,8 @@ const Notification = ({navigation}) => {
       // colors={['#db91d0', '#d959c6', '#d921bd']}
       colors={['#79DAE8', '#30AADF', '#3498db']}
       style={styles.container}>
+      <StatusBar backgroundColor={COLORS.statusBar} animated={false} />
+
       <View
         style={[
           {
@@ -53,11 +61,11 @@ const Notification = ({navigation}) => {
 
       <View style={[styles.CardContainer, SHADOW]}>
         <Text style={{fontSize: 18, color: 'white'}}>
-          si vous avez apprécié notre application, veuillez aimer et partager
+          Si vous avez apprécié notre application, veuillez aimer et partager
           avec vos amis
           {'\n'}
           {'\n'}
-          if you have enjoyed our App Please Like And Share With Your Friends
+          If you have enjoyed our App Please Like And Share With Your Friends
         </Text>
         <View
           style={{

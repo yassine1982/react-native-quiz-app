@@ -3,6 +3,7 @@
 import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
 import React from 'react';
 import HyperLink from 'react-native-hyperlink';
+import {SHADOW} from '../constants';
 
 const ModalScreen = ({showModal, COLORS, setShowModal}) => {
   return (
@@ -20,7 +21,7 @@ const ModalScreen = ({showModal, COLORS, setShowModal}) => {
               // flex: 1,
               backgroundColor: COLORS.white,
               width: '90%',
-              height: '50%',
+              height: '60%',
               borderRadius: 20,
               padding: 20,
               alignItems: 'center',
@@ -44,9 +45,11 @@ const ModalScreen = ({showModal, COLORS, setShowModal}) => {
                   padding: 10,
                   alignSelf: 'center',
                 }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-                perferendis natus corporis sunt. Ipsa, magnam dignissimos
-                aperiam a quaerat quia inventore recusandae earum porro.
+                QuizApp est une application qui aide les utilisateurs à
+                entrainer leur cerveaux avec des questions interessantes et
+                populaires . Jouez contre votre famille, vos amis et d'autres
+                jouyeurs pour ganger! activer votre intellect et avoir de la
+                chance ..!
               </Text>
               <Text
                 style={{
@@ -73,13 +76,16 @@ const ModalScreen = ({showModal, COLORS, setShowModal}) => {
 
             <TouchableOpacity
               onPress={() => setShowModal(false)}
-              style={{
-                backgroundColor: COLORS.accent,
-                padding: 4,
-                width: 50,
-                borderRadius: 40,
-                marginTop: 5,
-              }}>
+              style={[
+                {
+                  backgroundColor: COLORS.accent,
+                  padding: 4,
+                  width: '70%',
+                  borderRadius: 40,
+                  marginTop: 5,
+                },
+                SHADOW,
+              ]}>
               <Text
                 style={{
                   textAlign: 'center',

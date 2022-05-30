@@ -168,7 +168,7 @@ const Quiz = ({route, navigation}) => {
     <LinearGradient
       colors={['#3b5998', COLORS.background, COLORS.primary]}
       style={styles.container}>
-      <StatusBar backgroundColor={'#3b5998'} animated={false} />
+      {/* <StatusBar backgroundColor={COLORS.statusBar} animated={false} /> */}
       {/* Hello World */}
       <Hello
         name={name}

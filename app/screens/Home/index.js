@@ -33,10 +33,10 @@ import img1 from '../../assets/images/img1.png';
 import computer from '../../assets/images/computer.png';
 import EN from '../../data/EN.json';
 import FR from '../../data/FR.json';
-import NAT from '../../data/NAT.json';
+// import NAT from '../../data/NAT.json';
 
 const Home = ({navigation}) => {
-  const [difficulty, setDifficulty] = useState();
+  const [difficulty, setDifficulty] = useState('easy');
   const [error, setError] = useState(false);
   const [name, setName] = useState('');
   const [validName, setValidName] = useState('');
@@ -103,7 +103,7 @@ const Home = ({navigation}) => {
     // console.log(FR[difficulty][0].difficulty);
     switchLanguage
       ? // ? fetchQuestions(EN[difficulty])
-        fetchQuestions(NAT[difficulty])
+        fetchQuestions(EN[difficulty])
       : fetchQuestions(FR[difficulty]);
   };
 
@@ -229,7 +229,7 @@ const Home = ({navigation}) => {
     <LinearGradient
       colors={['#3b5998', COLORS.background, COLORS.primary]}
       style={styles.container}>
-      <StatusBar backgroundColor={'#3b5998'} animated={false} />
+      <StatusBar backgroundColor={COLORS.statusBar} animated={false} />
       {error && <Text>{error}</Text>}
 
       {loading && <Loader />}
