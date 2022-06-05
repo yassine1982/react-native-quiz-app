@@ -283,6 +283,94 @@
         "Plage d'applications avec des conceptions identiques",
         "Description d'identification abstraite aléatoire"
       ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulte": "moyen",
+      "question": "Quelle société Internet a commencé sa vie en tant que librairie en ligne appelée 'Cadabra' ?",
+      "correct_answer": "Amazon",
+      "incorrect_answers": ["eBay", "Surstock", "Shopify"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulty": "moyen",
+      "question": "FLAC signifie Free Lossless Audio Condenser",
+      "correct_answer": "Faux",
+      "incorrect_answers": ["Vrai"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulty": "moyen",
+      "question": "Whistler était le nom de code de ce système d'exploitation Microsoft.",
+      "correct_answer": "Windows XP",
+      "incorrect_answers": ["Windows 2000", "Windows 7", "Windows 95"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulty": "moyen",
+      "question": "Le tout premier bug informatique enregistré était un papillon trouvé à l'intérieur d'un ordinateur Harvard Mark II.",
+      "correct_answer": "Vrai",
+      "incorrect_answers": ["Faux"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulty": "difficile",
+      "question": "Pour quel type d'algorithme Ron Rivest n'est-il pas célèbre ?",
+      "correct_answer": "Schéma de partage secret",
+      "incorrect_answers": [
+        "Algorithme de hachage",
+        "Cryptage asymétrique",
+        " Chiffrement de flux "
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulty": "difficile",
+      "question": "Qui est le fondateur de Palantir ?",
+      "correct_answer": "Pierre Thiel",
+      "incorrect_answers": ["Mark Zuckerberg", "Marc Benioff", "Jack Dorsey"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulté": "moyen",
+      "question": "Le tout premier bogue informatique enregistré était un papillon trouvé à l'intérieur d'un ordinateur Harvard Mark II.",
+      "correct_answer": "Vrai",
+      "incorrect_answers": ["Faux"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulté": "moyen",
+      "question": "Le fabricant OEM d'ordinateurs Clevo, connu pour sa gamme d'ordinateurs portables Sager, est basé dans quel pays ?",
+      "correct_answer": "Taïwan",
+      "incorrect_answers": [
+        "États-Unis",
+        "Allemagne",
+        "Chine (République populaire de)"
+      ]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "booléen",
+      "difficulté": "moyen",
+      "question": "Windows NT est un noyau monolithique.",
+      "correct_answer": "Faux",
+      "incorrect_answers": ["Vrai"]
+    },
+    {
+      "category": "Science : Informatique",
+      "type": "multiple",
+      "difficulté": "moyen",
+      "question": "Lequel de ces noms est le nom du dispositif de dépôt de clé défectueux introduit par la National Security Agency en 1993 ?",
+      "correct_answer": "Puce Clipper",
+      "incorrect_answers": ["Enigma Machine", "Skipjack", "Nautilus"]
     }
   ]
 }

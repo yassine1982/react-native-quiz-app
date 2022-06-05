@@ -1,0 +1,21 @@
+{
+  "translation": {
+    "WelcomeText": "Welcome",
+    "startText": "Start",
+    "easyText": "Easy",
+    "mediumText": "Medium",
+    "hardText": "Hard",
+    "selectQuizDifficultyText": "Select Quiz Dfficulty",
+    "resetText": "Reset",
+    "choseDifficultyText": "Please choose difficulty !",
+    "choseNameText": "Please Chose Name !",
+    "enterNameText": "Enter Your Name",
+    "aboutUsText": "About Us",
+    "resetTitleText": "Reset Setting",
+    "resetBodyText": "Do you want to reset settings and levels!?",
+    "notificationText": "If you have enjoyed our App Please Like And Share With Your Friends",
+    "aboutContentText": "QuizApp is an application that helps users to train their brains with interesting questions and popular. Play against your family,  friends and others players to win! activate your intellect and have chance ..!",
+    "give5start": "If you have enojyed with our QuizApp ,Please let's give us 5 start! https://aboutreact.com",
+    "splashText": "Test your knowledge of Technology, this computer Quiz has three levels: Simple, Medium, and Difficult ... so, let's go!"
+  }
+}

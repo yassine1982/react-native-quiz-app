@@ -5,8 +5,11 @@ import LottieView from 'lottie-react-native';
 import {View, Text, StyleSheet, StatusBar} from 'react-native';
 import {COLORS, FONTS, SHADOW} from '../../constants';
 import computer from '../../assets/lottie/computer.json';
+import go from '../../assets/lottie/go.json';
+import {useTranslation} from 'react-i18next';
 
 const Splash = ({navigation}) => {
+  const {t} = useTranslation();
   const [finish, setFinish] = useState(false);
   const onAnimationFinish = () => setFinish(true);
   useEffect(() => {
@@ -49,13 +52,23 @@ const Splash = ({navigation}) => {
           }}
           onAnimationFinish={onAnimationFinish}
         />
+        {/* <LottieView
+          source={go}
+          autoPlay
+          loop={false}
+          style={{
+            // backgroundColor: COLORS.playagain,
+            height: 200,
+            width: 200,
+            alignSelf: 'center',
+            borderRadius: 8,
+            margin: 10,
+          }}
+          onAnimationFinish={onAnimationFinish}
+        /> */}
 
         <View>
-          <Text style={[styles.message]}>
-            Testez vos connaissances sur les ordinateurs et la programmation en
-            génèrale, ce computer Quiz comporte trois niveaux : Simple, Moyen et
-            Difficile .. alors C'est parti !
-          </Text>
+          <Text style={[styles.message]}>{t('splashText')}</Text>
         </View>
       </View>
 

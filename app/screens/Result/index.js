@@ -66,7 +66,7 @@ const Result = ({route, navigation}) => {
         },
         {text: 'Yes', onPress: () => BackHandler.exitApp()},
       ],
-      {cancelable: false},
+      {cancelable: true},
     );
     return true;
   };

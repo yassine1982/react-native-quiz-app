@@ -1,15 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-alert */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable semi */
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  SafeAreaView,
-  StatusBar,
-  Animated,
-  StyleSheet,
-} from 'react-native';
+import {View, BackHandler, Alert} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {COLORS} from '../../constants';
@@ -22,6 +17,8 @@ import CircularProgress from 'react-native-circular-progress-indicator';
 import Sound from 'react-native-sound';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {styles} from './style';
+import {useFocusEffect} from '@react-navigation/native';
+import cancelPressButtonHooks from '../../utils/utils';
 // shuffel results array
 
 const Quiz = ({route, navigation}) => {
@@ -164,6 +161,8 @@ const Quiz = ({route, navigation}) => {
     // setMusic(wrong);
   };
 
+  cancelPressButtonHooks('Exit Quiz', 'Do you want to exit Quiz?', false);
+
   return (
     <LinearGradient
       colors={['#3b5998', COLORS.background, COLORS.primary]}
@@ -201,7 +200,7 @@ const Quiz = ({route, navigation}) => {
           inActiveStrokeColor="#2ecc71"
           inActiveStrokeOpacity={0.2}
           titleColor={'white'}
-          titleStyle={{fontWeight: 'bold', fontSize: 17, padding: 2}}
+          titleStyle={{fontWeight: 'bold', fontSize: 17}}
           // onAnimationComplete={() => console.log('')}
         />
         {/* code wifi ocp omnisport24586eee */}
@@ -212,7 +211,7 @@ const Quiz = ({route, navigation}) => {
         handleNext={handleNext}
       />
       {/* Background Image if zIndex = -XXX => no image will be displayed */}
-      <QuizBackgroundImage />
+      {/* <QuizBackgroundImage /> */}
     </LinearGradient>
   );
 };

@@ -3,9 +3,12 @@
 import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
 import React from 'react';
 import HyperLink from 'react-native-hyperlink';
-import {SHADOW} from '../constants';
+import {FONTS, SHADOW} from '../constants';
+import {useTranslation} from 'react-i18next';
 
 const ModalScreen = ({showModal, COLORS, setShowModal}) => {
+  const {t, i18n} = useTranslation();
+
   return (
     <View>
       <Modal animationType="slide" transparent={true} visible={showModal}>
@@ -37,39 +40,34 @@ const ModalScreen = ({showModal, COLORS, setShowModal}) => {
                 justifyContent: 'space-between',
                 alignItems: 'flex-start',
                 // marginVertical: 20,
+                padding: 10,
               }}>
               <Text
                 style={{
                   fontSize: 16,
                   // backgroundColor: '#FFa',
-                  padding: 10,
                   alignSelf: 'center',
+                  fontFamily: FONTS.comicItalic,
                 }}>
-                QuizApp est une application qui aide les utilisateurs à
-                entrainer leur cerveaux avec des questions interessantes et
-                populaires . Jouez contre votre famille, vos amis et d'autres
-                jouyeurs pour ganger! activer votre intellect et avoir de la
-                chance ..!
-              </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: COLORS.accent,
-                  marginTop: 10,
-                  padding: 10,
-                }}>
-                email : riahiy93@gmail.com
+                {t('aboutContentText')}
               </Text>
               <HyperLink
                 linkStyle={{color: '#2980b9', fontSize: 16}}
                 onPress={(url, text) => console.log(url + ', ' + text)}
                 linkDefault={true} // if false link doesn't go any where
-                linkText={url =>
-                  url === 'https://aboutreact.com' ? 'AboutReact' : url
-                }>
-                <Text>
-                  If you have enojyed with our QuizApp ,Please let's give us 5
-                  start! https://aboutreact.com
+                // linkText={url =>
+                //   url === 'riahiy93@gmail.com' ? 'riahiy93@gmail.com' : url
+                // }
+              >
+                {/* <Text>{t('give5start')}</Text> */}
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: COLORS.accent,
+                    fontFamily: FONTS.comicItalic,
+                    marginTop: 10,
+                  }}>
+                  riahiy93@gmail.com
                 </Text>
               </HyperLink>
             </View>

@@ -7,6 +7,7 @@
 /* eslint-disable no-catch-shadow */
 
 import React, {useState, useEffect} from 'react';
+
 import {
   Switch,
   StyleSheet,
@@ -19,6 +20,8 @@ import {
   Alert,
   Platform,
   TextInput,
+  Vibration,
+  BackHandler,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {COLORS, SIZES, SHADOW, FONTS} from '../../constants/theme';
@@ -31,12 +34,23 @@ import NetInfo from '@react-native-community/netinfo';
 import LinearGradient from 'react-native-linear-gradient';
 import img1 from '../../assets/images/img1.png';
 import computer from '../../assets/images/computer.png';
+import start from '../../assets/lottie/start.json';
 import EN from '../../data/EN.json';
 import FR from '../../data/FR.json';
+import {useTranslation} from 'react-i18next';
+// import * as RNLocalize from 'react-native-localize';
+import {localLanguage} from '../../languages/i18n';
+import LottieView from 'lottie-react-native';
+import cancelPressButtonHooks from '../../utils/utils';
 // import NAT from '../../data/NAT.json';
 
 const Home = ({navigation}) => {
+  //local langue from android phone:
+  console.log(JSON.stringify(localLanguage));
+  // console.log(RNLocalize.getLocales()[0].languageCode);
+
   const [difficulty, setDifficulty] = useState('easy');
+  const [playAnimationStart, setPlayAnimationStart] = useState(0);
   const [error, setError] = useState(false);
   const [name, setName] = useState('');
   const [validName, setValidName] = useState('');
@@ -46,8 +60,11 @@ const Home = ({navigation}) => {
   const [medium] = useState('medium');
   const [hard] = useState('hard');
   const [connection, setConnection] = useState(false);
-  const [switchLanguage, setSwitchLanguage] = useState(true);
   const [switchvolume, setSwitchvolume] = useState(true);
+  const [switchLanguage, setSwitchLanguage] = useState(
+    localLanguage === 'fr' ? false : true,
+  );
+  // console.log(switchLanguage);
 
   //handle Network Connection Events
 
@@ -69,6 +86,7 @@ const Home = ({navigation}) => {
   const HandelSelectedItem = item => {
     setDifficulty(item);
   };
+  //handle Name TextInput
   const handelName = () => {
     //logic for controling Nmae property
     if (name.length > 10) {
@@ -86,18 +104,21 @@ const Home = ({navigation}) => {
     }
     return true;
   };
-
+  //handle Submit Button
   const handleSubmit = diff => {
     // _checkConnection();
     if (!diff) {
       // setError(true);
       // showing Toast
 
-      toastWithDurationHandler('Please choose difficulty !');
+      toastWithDurationHandler(t('choseDifficultyText'));
+      startVibration();
       return;
     } else if (validName === '') {
       // setError(true);
-      toastWithDurationHandler('Please Chose Name !');
+      toastWithDurationHandler(t('choseNameText'));
+      startVibration();
+
       return;
     }
     // console.log(FR[difficulty][0].difficulty);
@@ -106,7 +127,7 @@ const Home = ({navigation}) => {
         fetchQuestions(EN[difficulty])
       : fetchQuestions(FR[difficulty]);
   };
-
+  //store Data to LocalStorage
   const storeData = async value => {
     try {
       // const jsonValue = JSON.stringify(value);
@@ -125,7 +146,7 @@ const Home = ({navigation}) => {
         await AsyncStorage.setItem('@name', '');
         await AsyncStorage.setItem('@start', '0');
         setLevelStart(0);
-        setDifficulty('');
+        setDifficulty('easy');
         setName('');
         setValidName('');
       } catch (e) {
@@ -138,8 +159,8 @@ const Home = ({navigation}) => {
   //confirm reset settings
   const clearDataConfirm = () => {
     Alert.alert(
-      'Reset Setting',
-      'Do you want to reset setting and levels?',
+      t('resetTitleText'),
+      t('resetBodyText'),
       [
         {
           text: 'No',
@@ -159,7 +180,7 @@ const Home = ({navigation}) => {
       // const jsonValue = JSON.stringify(value);
       const level = await AsyncStorage.getItem('@start');
       if (level === null || level.length === 0) {
-        console.log('inside level === null');
+        // console.log('inside level === null');
         return;
       }
       setLevelStart(parseInt(level));
@@ -186,14 +207,14 @@ const Home = ({navigation}) => {
     });
     // setLoading(false);
   };
-
+  //check Level from LocalStorage
   useEffect(() => {
     setLoading(true);
     _getLevelStart();
     const unsubscribe = navigation.addListener('focus', () => {
       // The screen is focused
       // Call any action
-      console.log('focused');
+      // console.log('focused');
       _getLevelStart();
     });
 
@@ -213,18 +234,63 @@ const Home = ({navigation}) => {
       }
     }, 20);
     return unsubscribe;
-  }, [validName, connection, _levelstart, navigation]);
+  }, [validName, connection, _levelstart, navigation, playAnimationStart]);
 
   // Function To make Toast with Custome Message
   const toastWithDurationHandler = message => {
     // To make Toast with duration
-    ToastAndroid.show(message, ToastAndroid.SHORT);
+    ToastAndroid.showWithGravityAndOffset(
+      message,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+      25, //xOffset
+      200, //yOffset
+    );
   };
 
   const thumbColorOn = Platform.OS === 'android' ? COLORS.accent : '#f3f3f3';
   const thumbColorOff = Platform.OS === 'android' ? '#f04141' : '#f3f3f3';
   const trackColorOn = Platform.OS === 'android' ? '#98e7f0' : '#0cd1e8';
   const trackColorOff = Platform.OS === 'android' ? '#f3adad' : '#f04141';
+  // translation file
+  const {t, i18n} = useTranslation();
+
+  //handleLanguage Change by swith component
+  const handleLangaugeChange = () => {
+    setSwitchLanguage(switchLanguage => !switchLanguage);
+    // i18n.changeLanguage(switchLanguage ? 'fr' : 'en');
+    i18n.changeLanguage(switchLanguage ? 'fr' : 'en');
+    switchLanguage
+      ? toastWithDurationHandler('Quiz question in french language')
+      : toastWithDurationHandler('Quiz question in english language');
+  };
+
+  //Duration of the vibration
+  const DURATION = 200;
+
+  const startVibration = () => {
+    //To start the vibration for the defined Duration
+    Vibration.vibrate(DURATION);
+  };
+
+  const stopVibration = () => {
+    //To Stop the vibration
+    Vibration.cancel();
+  };
+
+  // Import backPressed Button from utils file
+  cancelPressButtonHooks('Exit App', 'Do you want to exit?', true);
+  // handle Start Button Animation
+  console.log(playAnimationStart);
+  console.log(difficulty);
+  console.log(typeof validName);
+  useEffect(() => {
+    if (difficulty !== 'undefined' && difficulty !== '' && validName !== '') {
+      setPlayAnimationStart(1);
+    } else {
+      setPlayAnimationStart(0);
+    }
+  }, [difficulty, validName]);
   return (
     <LinearGradient
       colors={['#3b5998', COLORS.background, COLORS.primary]}
@@ -235,8 +301,8 @@ const Home = ({navigation}) => {
       {loading && <Loader />}
       <>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Computer</Text>
-          <Text style={styles.title}>Quiz</Text>
+          {/* <Text style={styles.title}>{t('WelcomeText')}</Text> */}
+          <Text style={styles.title}>Computer Quiz</Text>
         </View>
         <Image source={img1} style={styles.imageTop} resizeMode="contain" />
         <Image
@@ -256,7 +322,7 @@ const Home = ({navigation}) => {
               fontSize: 20,
               fontFamily: FONTS.comicItalic,
             }}>
-            Hi, {validName}
+            {t('WelcomeText')}, {validName}
           </Text>
         ) : null}
         {/* <Text style={styles.titleSitting}>Select Difficulty</Text> */}
@@ -271,10 +337,9 @@ const Home = ({navigation}) => {
               onValueChange={(itemValue, itemIndex) =>
                 HandelSelectedItem(itemValue)
               }>
-              <Picker.Item label="Select Difficulty" />
-              <Picker.Item label="Easy" value={easy} />
-              <Picker.Item label="Medium" value={medium} />
-              <Picker.Item label="Hard" value={hard} />
+              <Picker.Item label={t('easyText')} value={easy} />
+              <Picker.Item label={t('mediumText')} value={medium} />
+              <Picker.Item label={t('hardText')} value={hard} />
             </Picker>
           </View>
         </View>
@@ -286,15 +351,13 @@ const Home = ({navigation}) => {
                 {backgroundColor: COLORS.gray, paddingHorizontal: 10},
                 SHADOW,
               ]}
-              placeholder="Enter Your Name"
+              placeholder={t('enterNameText')}
               value={name}
               onChangeText={value => setName(value)}
               onSubmitEditing={handelName}
             />
           )}
-          {/* <Text>{validName}</Text> */}
-
-          <TouchableOpacity onPress={() => handleSubmit(difficulty)}>
+          {/* <TouchableOpacity onPress={() => handleSubmit(difficulty)}>
             <LinearGradient
               // colors={['#4c669f', '#3b5998', '#192f6a']}
               // colors={['#db91d0', '#d959c6', '#d921bd']}
@@ -304,9 +367,21 @@ const Home = ({navigation}) => {
                 SHADOW,
                 {flexDirection: 'row', justifyContent: 'center'},
               ]}>
-              <Text style={styles.titleStart}>Start</Text>
+              <Text style={styles.titleStart}>{t('startText')}</Text>
               <Feather name="play" size={25} color="white" />
             </LinearGradient>
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() => handleSubmit(difficulty)}
+            style={[styles.Start, {height: 100, width: 100, borderWidth: 0}]}>
+            <LottieView
+              source={start}
+              autoPlay={true}
+              loop={true}
+              speed={playAnimationStart}
+              // style={{height: 100, width: 100}}
+              // onAnimationFinish={onAnimationFinish}
+            />
           </TouchableOpacity>
           <View
             style={{
@@ -315,7 +390,7 @@ const Home = ({navigation}) => {
               alignItems: 'center',
               width: '90%',
               alignSelf: 'center',
-              marginTop: 5,
+              // marginTop: 5,
             }}>
             <TouchableOpacity
               style={[
@@ -330,7 +405,9 @@ const Home = ({navigation}) => {
               ]}
               onPress={() => clearDataConfirm()}>
               <Feather name="menu" size={18} color="white" />
-              <Text style={[styles.titleStart, {fontSize: 18}]}>Reset</Text>
+              <Text style={[styles.titleStart, {fontSize: 18}]}>
+                {t('resetText')}
+              </Text>
             </TouchableOpacity>
             <View
               style={[
@@ -351,16 +428,7 @@ const Home = ({navigation}) => {
             >
               <Switch
                 styles={{backgroundColor: COLORS.dark}}
-                onValueChange={() => {
-                  setSwitchLanguage(switchLanguage => !switchLanguage);
-                  switchLanguage
-                    ? toastWithDurationHandler(
-                        'Quiz question in french language',
-                      )
-                    : toastWithDurationHandler(
-                        'Quiz question in english language',
-                      );
-                }}
+                onValueChange={handleLangaugeChange}
                 value={switchLanguage}
                 thumbColor={switchLanguage ? thumbColorOn : thumbColorOff}
                 trackColor={{false: trackColorOff, true: trackColorOn}}
@@ -438,14 +506,16 @@ const Home = ({navigation}) => {
               styles.Start,
               {
                 backgroundColor: COLORS.background,
-                width: '35%',
+                width: '45%',
                 height: 38,
-                marginTop: '5%',
+                marginTop: '10%',
               },
               SHADOW,
             ]}
             onPress={() => setShowModal(true)}>
-            <Text style={[styles.titleStart, {fontSize: 16}]}>About Us !</Text>
+            <Text style={[styles.titleStart, {fontSize: 16}]}>
+              {t('aboutUsText')}
+            </Text>
           </TouchableOpacity>
         </View>
       </>
@@ -534,7 +604,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    // marginTop: 20,
+    marginTop: 5,
     justifyContent: 'center',
     // backgroundColor: COLORS.playagain,
     borderWidth: 1,
